@@ -1,0 +1,56 @@
+{
+  "name": "applied-ai-eval",
+  "version": "0.1.0",
+  "description": "Evaluate applied AI apps the way you ship them: run the real pipeline over golden cases, score the final output with deterministic grounding checks, and compare baseline against candidate before adopting a prompt, model or config change.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "aieval": "dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p test/tsconfig.json --noEmit",
+    "test": "vitest run",
+    "prepare": "npm run build",
+    "example": "node dist/cli.js run --config examples/support-reply/eval.config.mjs --variant baseline,friendly"
+  },
+  "keywords": [
+    "llm",
+    "eval",
+    "evaluation",
+    "ai",
+    "golden-set",
+    "regression-testing",
+    "llm-as-judge",
+    "grounding",
+    "hallucination"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kinlu/applied-ai-eval.git"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "title": "Home-screen widget missing on an older iPhone",
+  "tags": ["devices", "requirements", "numbers"],
+  "notes": "Fictional hold-out case. The customer's iOS version is below the widget's minimum.",
+  "inputs": {
+    "message": { "file": "message.txt" },
+    "kb": { "file": "kb.md" }
+  },
+  "carry": ["The Quillbox widget needs iOS 17 or later and Quillbox 5.2 or later."],
+  "traps": [
+    {
+      "id": "states-minimum-ios",
+      "description": "States the iOS 17 minimum, which the customer's iOS 16 does not meet.",
+      "mustInclude": ["iOS 17"]
+    }
+  ]
+}

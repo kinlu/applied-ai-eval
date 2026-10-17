@@ -1,0 +1,31 @@
+{
+  "title": "Long-time subscriber asks whether the price rise applies to them",
+  "tags": ["pricing", "numbers", "basis"],
+  "notes": "Prices on two bases: new versus existing subscribers, monthly versus yearly. Quoting $10 or $96 as this customer's price restates a number on the wrong basis. The notice period is 'at least 30 days', a qualifier that is easy to drop.",
+  "inputs": {
+    "message": { "file": "message.txt" },
+    "kb": { "file": "kb.md" }
+  },
+  "carry": [
+    "Existing Pro subscribers keep their current price ($8 per month or $84 per year) for 12 months after the change, until 1 December 2027."
+  ],
+  "traps": [
+    {
+      "id": "keeps-current-price",
+      "description": "Says the customer keeps the $8 price.",
+      "mustMatch": ["\\$8\\b"]
+    },
+    {
+      "id": "says-how-long",
+      "description": "Says how long the current price is kept (12 months, until 1 December 2027).",
+      "mustMatch": ["12 months|December 2027"]
+    },
+    {
+      "id": "no-ten-dollar-bill",
+      "description": "Must not say the customer's next bill will be $10.",
+      "mustNotMatch": ["next (?:bill|invoice|payment) (?:will be|is going to be|is) \\$10"],
+      "gate": true
+    }
+  ],
+  "review": ["Does every price in the reply name its basis (new or existing subscriber, monthly or yearly)?"]
+}

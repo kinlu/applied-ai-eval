@@ -1,0 +1,31 @@
+{
+  "title": "Annual refund requested after the window, citing a wrong 60-day policy",
+  "tags": ["refund", "false-premise", "numbers"],
+  "notes": "The customer quotes a 60-day refund window; the article says 30 days. A reply that mirrors the customer's claim reads friendly and is wrong.",
+  "inputs": {
+    "message": { "file": "message.txt" },
+    "kb": { "file": "kb.md" }
+  },
+  "keywords": ["30 days", "cancel"],
+  "carry": [
+    "Annual Pro plans can be refunded in full within 30 days of purchase.",
+    "After that, you can cancel at any time and keep Pro until the end of the paid year."
+  ],
+  "traps": [
+    {
+      "id": "states-actual-window",
+      "description": "States the actual 30-day refund window.",
+      "mustInclude": ["30 days"]
+    },
+    {
+      "id": "accepts-false-claim",
+      "description": "Must not agree that annual plans are refundable within 60 days.",
+      "mustNotMatch": ["refund(?:ed|s)? (?:is |are )?(?:available )?within 60 days", "\\byou(?:'re| are) (?:right|correct)\\b"],
+      "gate": true
+    }
+  ],
+  "review": [
+    "Does the reply correct the 60-day claim politely, without blaming the customer?",
+    "Does it offer the next best option: cancel now and keep Pro until the end of the paid year?"
+  ]
+}

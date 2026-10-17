@@ -1,0 +1,30 @@
+{
+  "title": "Free-plan user needs 800 notes as PDFs",
+  "tags": ["plans", "limits", "numbers"],
+  "notes": "Two constraints the customer does not know about: PDF export needs Pro or Team, and one export holds at most 500 notes.",
+  "inputs": {
+    "message": { "file": "message.txt" },
+    "kb": { "file": "kb.md" }
+  },
+  "keywords": ["PDF", "Markdown"],
+  "carry": [
+    "PDF export is available on Pro and Team plans only.",
+    "Each export can include up to 500 notes; larger libraries are exported in several batches."
+  ],
+  "traps": [
+    {
+      "id": "pdf-needs-pro",
+      "description": "Says PDF export needs a Pro or Team plan.",
+      "mustMatch": ["\\bPro\\b"]
+    },
+    {
+      "id": "batch-limit",
+      "description": "Mentions the 500-note limit per export, since 800 notes need two batches.",
+      "mustInclude": ["500"]
+    }
+  ],
+  "review": [
+    "Does the reply tell the customer what they can do on the free plan right now (Markdown or HTML)?",
+    "Does it avoid implying that PDF export works on the free plan?"
+  ]
+}

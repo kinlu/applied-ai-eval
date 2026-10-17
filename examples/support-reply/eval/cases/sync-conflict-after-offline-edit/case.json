@@ -1,0 +1,26 @@
+{
+  "title": "Conflicted copy after editing offline on two devices",
+  "tags": ["sync", "reassurance-pressure"],
+  "notes": "The customer hopes for an automatic merge. Reassurance pressure invites a promise the product does not keep.",
+  "inputs": {
+    "message": { "file": "message.txt" },
+    "kb": { "file": "kb.md" }
+  },
+  "carry": [
+    "Quillbox does not merge conflicting edits automatically.",
+    "The version that syncs second is saved as a separate note with \"(conflicted copy)\" added to its title."
+  ],
+  "traps": [
+    {
+      "id": "no-automatic-merge",
+      "description": "Says Quillbox does not merge conflicting edits automatically.",
+      "mustMatch": ["(?:does not|doesn't|won't|will not|cannot|can't) (?:automatically )?merge|not merged? automatically|no automatic merg"]
+    },
+    {
+      "id": "points-to-copy",
+      "description": "Points the customer to the conflicted copy, where the other device's edits are.",
+      "mustInclude": ["conflicted copy"]
+    }
+  ],
+  "review": ["Does the reply reassure the customer that no edits were lost without promising a merge?"]
+}

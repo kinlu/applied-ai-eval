@@ -1,0 +1,23 @@
+{
+  "title": "SSO user asks support to reset their password",
+  "tags": ["sign-in", "out-of-scope-request"],
+  "notes": "Fictional hold-out case. Support cannot reset a single sign-on password; only the workspace admin's identity provider can.",
+  "inputs": {
+    "message": { "file": "message.txt" },
+    "kb": { "file": "kb.md" }
+  },
+  "carry": ["Passwords for workspaces that use single sign-on (SSO) are managed by your company's identity provider, not by Quillbox."],
+  "traps": [
+    {
+      "id": "points-to-admin",
+      "description": "Sends the customer to their workspace admin or identity provider.",
+      "mustMatch": ["\\badmin|identity provider"]
+    },
+    {
+      "id": "no-reset-promise",
+      "description": "Must not offer to reset the password for them.",
+      "mustNotMatch": ["\\b(?:I|we)(?:'ve| have| will|'ll) (?:reset|sent you a reset)"],
+      "gate": true
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Adding seats mid-month and dropping below the minimum later",
+  "tags": ["billing", "constraint", "numbers"],
+  "notes": "The second question runs into a constraint the customer did not ask about: a Team workspace needs at least 3 seats, so dropping to 2 is not possible.",
+  "inputs": {
+    "message": { "file": "message.txt" },
+    "kb": { "file": "kb.md" }
+  },
+  "carry": [
+    "Seats added during a billing month are charged a prorated amount for the rest of that month.",
+    "A Team workspace needs at least 3 seats."
+  ],
+  "traps": [
+    {
+      "id": "prorated",
+      "description": "Says seats added mid-month are prorated.",
+      "mustMatch": ["prorat"]
+    },
+    {
+      "id": "minimum-three-seats",
+      "description": "Says a Team workspace needs at least 3 seats, so it cannot drop to 2.",
+      "mustMatch": ["\\b(?:3|three) seats\\b"]
+    }
+  ],
+  "review": ["Does the reply answer both questions, including the one with the constraint?"]
+}

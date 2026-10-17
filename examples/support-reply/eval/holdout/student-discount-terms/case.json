@@ -1,0 +1,25 @@
+{
+  "title": "Student wants the discount on the monthly plan plus a coupon",
+  "tags": ["discounts", "conditions"],
+  "notes": "Fictional hold-out case. Two conditions: the discount applies to annual Pro only, and it cannot be combined with other offers.",
+  "inputs": {
+    "message": { "file": "message.txt" },
+    "kb": { "file": "kb.md" }
+  },
+  "carry": [
+    "Students get 50% off the annual Pro plan with a valid school email address.",
+    "The student discount cannot be combined with other offers or coupons."
+  ],
+  "traps": [
+    {
+      "id": "annual-only",
+      "description": "Says the discount is for the annual plan only.",
+      "mustMatch": ["\\bannual\\b"]
+    },
+    {
+      "id": "not-combinable",
+      "description": "Says the discount cannot be combined with a coupon.",
+      "mustMatch": ["(?:cannot|can't|can not|isn't able to) be combined|not combinable|can't (?:be )?combine|cannot (?:be )?combine|can't use (?:both|it with)"]
+    }
+  ]
+}

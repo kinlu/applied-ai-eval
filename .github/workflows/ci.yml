@@ -1,0 +1,42 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - name: Example smoke run
+        run: |
+          node dist/cli.js run --config examples/support-reply/eval.config.mjs --variant baseline,friendly --label ci
+          RUN=$(ls -d examples/support-reply/eval/reports/*-ci | tail -1)
+          node dist/cli.js compare "$RUN#baseline" "$RUN#baseline" --fail-on-regression > /dev/null
+          if node dist/cli.js compare "$RUN#baseline" "$RUN#friendly" --fail-on-regression > /dev/null; then
+            echo "expected the friendly variant to regress" && exit 1
+          fi
+
+  # The CLI supports Node 20; the test runner needs 22, so Node 20 runs the example only.
+  node20:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: node dist/cli.js run --config examples/support-reply/eval.config.mjs --variant all --label node20

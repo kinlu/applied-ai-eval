@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+# Eval runs contain model outputs; keep them out of git.
+eval/reports/
+examples/*/eval/reports/

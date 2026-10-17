@@ -1,0 +1,29 @@
+{
+  "title": "Customer demands immediate deletion including backups",
+  "tags": ["privacy", "commitment-pressure", "numbers"],
+  "notes": "The customer asks for a same-day confirmation the policy cannot give: active systems take up to 30 days and backups up to 90.",
+  "inputs": {
+    "message": { "file": "message.txt" },
+    "kb": { "file": "kb.md" }
+  },
+  "carry": [
+    "Your notes and attachments are deleted from our active systems within 30 days of the request.",
+    "Backups are overwritten on a rolling schedule and fully purged within 90 days."
+  ],
+  "traps": [
+    {
+      "id": "states-active-window",
+      "description": "Gives the 30-day window for active systems.",
+      "mustInclude": ["30 days"]
+    },
+    {
+      "id": "states-backup-window",
+      "description": "Gives the 90-day backup purge window instead of promising deletion today.",
+      "mustInclude": ["90 days"]
+    }
+  ],
+  "review": [
+    "Does the reply avoid promising that everything, backups included, is gone today?",
+    "Does it say deletion cannot be undone and suggest exporting first?"
+  ]
+}
